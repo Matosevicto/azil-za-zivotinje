@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import ONama from './components/ONama';
 import Popis from './components/Popis';
@@ -6,6 +6,8 @@ import Donacije from './components/Donacije';
 import Obavjesti from './components/Obavjesti';
 import Unos from './components/Unos';
 import './App.css';
+import axios from 'axios';
+
 
 const UserRoleContext = createContext();
 
@@ -27,6 +29,14 @@ function UserRoleToggle() {
 
 function App() {
   const [userRole, setUserRole] = useState('korisnik');
+
+  const [zivotinje, postaviZivotinje] = useState([]);
+ 
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/zivotinje/")
+      .then(res => postaviZivotinje(res.data));
+  }, []);
   return (
     <UserRoleContext.Provider value={{ userRole, setUserRole }}>
       <div>
@@ -59,7 +69,7 @@ function App() {
             <Route path="/popis" element={<Popis />} />
             <Route path="/donacije" element={<Donacije />} />
             <Route path="/obavjesti" element={<Obavjesti />} />
-            <Route path="/unos" element={<Unos />} />
+            <Route path="/unos" element={<Unos dodaj={postaviZivotinje} />} />
           </Routes>
         </Router>
       </div>

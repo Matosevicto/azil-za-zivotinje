@@ -1,0 +1,28 @@
+{
+  "zivotinje": [
+    {
+      "ime": "Bobi",
+      "vrsta": "Pas",
+      "spol": "Muški",
+      "starost": "2",
+      "rasa": "Labrador",
+      "udomljen": true,
+      "slika": "https://www.zooplus.hr/magazin/wp-content/uploads/2021/09/AdobeStock_296584307-1024x668-1-768x501.jpeg",
+      "cip": true,
+      "zadnjiPregled": "2022-04-01",
+      "napomena": "Dobro se slaže s drugim psima."
+    },
+    {
+      "ime": "Miki",
+      "vrsta": "Mačka",
+      "spol": "Ženski",
+      "starost": "4",
+      "rasa": "Sijamska mačka",
+      "udomljen": false,
+      "slika": "https://example.com/miki.jpg",
+      "cip": false,
+      "zadnjiPregled": "2021-10-05",
+      "napomena": "Potreban joj je poseban tretman."
+    }
+  ]
+}

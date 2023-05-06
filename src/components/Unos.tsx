@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "../Styles.css";
+import axios from 'axios';
 
-function Unos() {
+function Unos(props) {
   const [podaci, postaviPodatke] = useState({
     ime: "",
     vrsta: "",
@@ -17,9 +18,35 @@ function Unos() {
   const [udomljen, postaviUdomljen] = useState(false);
   const [cip, postaviCip] = useState(false);
 
-  const slajiPodatke = (event) => {
+  function obradiPodatke(objekt){
+    return {
+      "zivotinja" : {
+        "ime" : objekt.ime,
+        "vrsta": objekt.vrsta,
+        "spol": objekt.spol,
+        "starost":Number(objekt.starost),
+        "rasa": objekt.rasa,
+        "udomljen":objekt.udomljen,
+        "slika":objekt.slika,
+        "cip":objekt.cip,
+        "zadnjiPregled":objekt.zadnjiPregled,
+        "napomena":objekt.napomena
+
+      }
+     
+    }
+  }
+  const saljiPodatke = (event) => {
     event.preventDefault();
     console.log(podaci);
+  
+    const zaSlanje = obradiPodatke(podaci);
+  
+    axios.post("http://localhost:3001/zivotinje", zaSlanje)
+      .then(ziv => {
+        axios.get("http://localhost:3001/zivotinje")
+          .then(ziv => props.dodaj(ziv.data));
+      });
   };
   function promjenaUlaza(event) {
     const { name, value } = event.target;
@@ -30,7 +57,7 @@ function Unos() {
   return (
     <>
     <h2>Unos životinje</h2>
-      <form onSubmit={slajiPodatke}>
+      <form onSubmit={saljiPodatke}>
         <label>
           Ime:
           <input
