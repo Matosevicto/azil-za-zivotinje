@@ -37,6 +37,13 @@ function App() {
       .get("http://localhost:3001/zivotinje/")
       .then(res => postaviZivotinje(res.data));
   }, []);
+  const handleNovaŽivotinja = (novaDonacija) => {
+    const newDonacija = {
+      id: donacije.length + 1,
+      tip: novaDonacija.tip,
+      vrijednost: novaDonacija.vrijednost,
+      opis: novaDonacija.opis,
+    };
   return (
     <UserRoleContext.Provider value={{ userRole, setUserRole }}>
       <div>
