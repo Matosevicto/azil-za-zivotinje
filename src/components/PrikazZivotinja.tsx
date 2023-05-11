@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Popup from "reactjs-popup";
 import "../Styles.css";
+import UrediZivotinju from "./UrediZivotinju";
 
 function PrikazZivotinja(props) {
   const [zivotinje, postaviZivotinje] = useState([]);
@@ -9,6 +10,8 @@ function PrikazZivotinja(props) {
   const [statusFilter, postaviStatusFilter] = useState([]);
   const [searchQuery, postaviSearchQuery] = useState("");
   const [selectedZivotinja, setSelectedZivotinja] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  
 
   useEffect(() => {
     axios
@@ -16,6 +19,7 @@ function PrikazZivotinja(props) {
       .then((response) => postaviZivotinje(response.data))
       .catch((error) => console.log(error));
   }, []);
+
 
   const udomiZivotinju = (id) => {
     axios
@@ -83,6 +87,15 @@ function PrikazZivotinja(props) {
   };
 
   const filtriraneZivotinje = filtrirajZivotinje(zivotinje);
+
+  const handleUrediClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleUrediZatvori = () => {
+    setIsEditing(false);
+  };
+
 
   return (
     <>
@@ -193,7 +206,11 @@ function PrikazZivotinja(props) {
               <button onClick={() => udomiZivotinju(selectedZivotinja.id)}>
                 Udomi životinju
               </button>
-            </div>
+              <button onClick={handleUrediClick}>Open Form</button>
+      {isEditing && <UrediZivotinju ime={selectedZivotinja.ime}  onClose={handleUrediZatvori} />}
+            
+          </div>
+            
           )}
         </Popup>
      </>

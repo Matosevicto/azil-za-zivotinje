@@ -16,7 +16,7 @@ function NovaDonacijaa({ dodajDonaciju }) {
     console.log(novaDonacija);
     const zaSlanje = obradiPodatke(novaDonacija);
 
-    axios.post("http://localhost:3001/donacije", zaSlanje)
+    axios.post("http://localhost:3001/obavijesti", zaSlanje)
     .then((rez) => {
       dodajDonaciju(stanje => [...stanje, rez.data])
     });
