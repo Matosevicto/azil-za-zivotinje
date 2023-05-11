@@ -20,29 +20,35 @@ function Donacije() {
   };
   const handleAcceptDonacija = (id) => {
     const donacijaIndex = donacije.findIndex((d) => d.id === id);
-    const updatedDonacija = { ...donacije[donacijaIndex], kategorija: "donirano" };
-  
-    axios.put(`http://localhost:3001/donacije/${id}`, {
-        id:"",
+    const updatedDonacija = {
+      ...donacije[donacijaIndex],
+      kategorija: "donirano",
+    };
+
+    axios
+      .put(`http://localhost:3001/donacije/${id}`, {
+        id: "",
         kategorija: updatedDonacija.kategorija,
-        tip:updatedDonacija.tip,
+        tip: updatedDonacija.tip,
         vrijednost: updatedDonacija.vrijednost,
-        opis: updatedDonacija.opis
-    })
-    .then(() => {
-      const newDonacije = [...donacije];
-      newDonacije[donacijaIndex] = updatedDonacija;
-      setDonacije(newDonacije);
-    })
-    .catch((error) => console.log(error));
+        opis: updatedDonacija.opis,
+      })
+      .then(() => {
+        const newDonacije = [...donacije];
+        newDonacije[donacijaIndex] = updatedDonacija;
+        setDonacije(newDonacije);
+      })
+      .catch((error) => console.log(error));
   };
 
   const handleObrisiDonaciju = (id) => {
     axios
       .delete(`http://localhost:3001/donacije/${id}`)
-      .then((response) => setDonacije(donacije.filter((donacija) => donacija.id !== id)))
+      .then((response) =>
+        setDonacije(donacije.filter((donacija) => donacija.id !== id))
+      )
       .catch((error) => console.log(error));
-  }
+  };
 
   useEffect(() => {
     axios
@@ -50,8 +56,6 @@ function Donacije() {
       .then((response) => setDonacije(response.data))
       .catch((error) => console.log(error));
   }, []);
-
-  
 
   return (
     <>
@@ -81,6 +85,15 @@ function Donacije() {
                 <td>{donacija.tip}</td>
                 <td>{donacija.vrijednost}</td>
                 <td>{donacija.opis}</td>
+                <td>
+                  <button onClick={() => handleAcceptDonacija(donacija.id)}>
+                    Donirano
+                  </button>
+
+                  <button onClick={() => handleObrisiDonaciju(donacija.id)}>
+                    Izbriši
+                  </button>
+                </td>
               </tr>
             ))}
         </tbody>
@@ -109,12 +122,11 @@ function Donacije() {
                   <button onClick={() => handleAcceptDonacija(donacija.id)}>
                     Prihvati
                   </button>
-                  
+
                   <button onClick={() => handleObrisiDonaciju(donacija.id)}>
-                    Obriši
+                    Izbriši
                   </button>
-        </td>
-        
+                </td>
               </tr>
             ))}
         </tbody>
@@ -131,15 +143,24 @@ function Donacije() {
           </tr>
         </thead>
         <tbody>
-        {donacije
+          {donacije
             .filter((donacija) => donacija.kategorija === "donirano")
             .map((donacija) => (
-            <tr key={donacija.id}>
-              <td>{donacija.tip}</td>
-              <td>{donacija.vrijednost}</td>
-              <td>{donacija.opis}</td>
-            </tr>
-          ))}
+              <tr key={donacija.id}>
+                <td>{donacija.tip}</td>
+                <td>{donacija.vrijednost}</td>
+                <td>{donacija.opis}</td>
+                <td>
+                  <button onClick={() => (donacija.id)}>
+                    Ponovi
+                  </button>
+
+                  <button onClick={() => handleObrisiDonaciju(donacija.id)}>
+                    Izbriši
+                  </button>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
       <hr />

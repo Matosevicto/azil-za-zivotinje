@@ -51,11 +51,8 @@ form {
     line-height: 1.5;
   }
   
-  p {
-    margin-bottom: 1.5em;
-  }
+ 
+  
   .image-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
+    background-color: rgb(153, 153, 172);
   }

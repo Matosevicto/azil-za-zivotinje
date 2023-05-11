@@ -5,8 +5,8 @@ import "../Styles.css";
 
 function PrikazZivotinja(props) {
   const [zivotinje, postaviZivotinje] = useState([]);
-  const [vrstaFilter, postaviVrstuFilter] = useState("");
-  const [statusFilter, postaviStatusFilter] = useState("");
+  const [vrstaFilter, postaviVrstuFilter] = useState([]);
+  const [statusFilter, postaviStatusFilter] = useState([]);
   const [searchQuery, postaviSearchQuery] = useState("");
   const [selectedZivotinja, setSelectedZivotinja] = useState(null);
 
@@ -32,17 +32,35 @@ function PrikazZivotinja(props) {
       .catch((error) => console.log(error));
   };
 
+  const handleVrstaFilterChange = (value) => {
+    if (vrstaFilter.includes(value)) {
+      postaviVrstuFilter(vrstaFilter.filter((vrsta) => vrsta !== value));
+    } else {
+      postaviVrstuFilter([...vrstaFilter, value]);
+    }
+  };
+  
+  const handleStatusFilterChange = (value) => {
+    if (statusFilter.includes(value)) {
+      postaviStatusFilter(statusFilter.filter((status) => status !== value));
+    } else {
+      postaviStatusFilter([...statusFilter, value]);
+    }
+  };
+
   const filtrirajZivotinje = (zivotinje) => {
     return zivotinje
       .filter((zivotinja) => {
-        if (vrstaFilter !== "") {
-          return zivotinja.vrsta.toLowerCase() === vrstaFilter.toLowerCase();
+        if (vrstaFilter.length > 0) {
+          return vrstaFilter.includes(zivotinja.vrsta.toLowerCase());
         }
         return true;
       })
       .filter((zivotinja) => {
-        if (statusFilter !== "") {
-          return zivotinja.udomljen === (statusFilter === "udomljena");
+        if (statusFilter.length > 0) {
+          return statusFilter.includes(
+            zivotinja.udomljen ? "udomljena" : "nijeudomljena"
+          );
         }
         return true;
       })
@@ -55,6 +73,7 @@ function PrikazZivotinja(props) {
         return true;
       });
   };
+  
   const openModal = (zivotinja) => {
     setSelectedZivotinja(zivotinja);
   };
@@ -65,90 +84,120 @@ function PrikazZivotinja(props) {
 
   const filtriraneZivotinje = filtrirajZivotinje(zivotinje);
 
-  
   return (
     <>
       <h2>Popis životinja u azilu</h2>
       <div className="filtar">
         <div>
-          <label htmlFor="vrstaFilter">Filtriraj po vrsti:</label>
-          <select
-            id="vrstaFilter"
-            value={vrstaFilter}
-            onChange={(e) => postaviVrstuFilter(e.target.value)}
-          >
-            <option value="">Sve vrste</option>
-            <option value="pas">Pas</option>
-            <option value="macka">Macka</option>
-            <option value="gmaz">Gmaz</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="statusFilter">Filtriraj po statusu:</label>
-          <select
-            id="statusFilter"
-            value={statusFilter}
-            onChange={(e) => postaviStatusFilter(e.target.value)}
-          >
-            <option value="">Svi statusi</option>
-            <option value="udomljena">Udomljena</option>
-            <option value="nijeudomljena">Nije udomljena</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="searchQuery">Traži:</label>
-          <input
-            id="searchQuery"
-            type="text"
-            value={searchQuery}
-            onChange={(e) => postaviSearchQuery(e.target.value)}
-          />
-        </div>
-      </div>
-      <div className="kartice">
-        {filtriraneZivotinje.map((zivotinja) => (
-          <div
-            key={zivotinja.id}
-            className="kartica"
-            onClick={() => openModal(zivotinja)}
-          >
-            <img
-              src={zivotinja.slika}
-              alt={zivotinja.ime}
-              height={250}
-              width={320}
+          <label>Filtriraj po vrsti:</label>
+          <div>
+            <label>
+              <input
+                type="checkbox"
+                value="pas"
+                checked={vrstaFilter.includes("pas")}
+                onChange={(e) => handleVrstaFilterChange(e.target.value)}
+                />
+                Pas
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  value="macka"
+                  checked={vrstaFilter.includes("macka")}
+                  onChange={(e) => handleVrstaFilterChange(e.target.value)}
+                />
+                Mačka
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  value="gmaz"
+                  checked={vrstaFilter.includes("gmaz")}
+                  onChange={(e) => handleVrstaFilterChange(e.target.value)}
+                />
+                Gmaz
+              </label>
+            </div>
+          </div>
+          <div>
+            <label>Filtriraj po statusu:</label>
+            <div>
+              <label>
+                <input
+                  type="checkbox"
+                  value="udomljena"
+                  checked={statusFilter.includes("udomljena")}
+                  onChange={(e) => handleStatusFilterChange(e.target.value)}
+                />
+                Udomljena
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  value="nijeudomljena"
+                  checked={statusFilter.includes("nijeudomljena")}
+                  onChange={(e) => handleStatusFilterChange(e.target.value)}
+                />
+                Nije udomljena
+              </label>
+            </div>
+          </div>
+          <div>
+            <label htmlFor="searchQuery">Traži:</label>
+            <input
+              id="searchQuery"
+              type="text"
+              value={searchQuery}
+              onChange={(e) => postaviSearchQuery(e.target.value)}
             />
           </div>
-        ))}
-      </div>
-      <Popup open={selectedZivotinja !== null} onClose={closeModal}>
-        {selectedZivotinja && (
-          <div className="image-container">
-            <img
-              src={selectedZivotinja.slika}
-              alt={selectedZivotinja.ime}
-              height={400}
-              width={500}
-            />
-            <h3>{selectedZivotinja.ime}</h3>
-            <p>Vrsta: {selectedZivotinja.vrsta}</p>
-            <p>Starost: {selectedZivotinja.starost}</p>
-            <p>Rasa: {selectedZivotinja.rasa}</p>
-            <p>
-              Status:{" "}
-              {selectedZivotinja.udomljen ? "Udomljena" : "Nije udomljena"}
-            </p>
-            <p>Čipiran: {selectedZivotinja.cip ? "Da" : "Ne"}</p>
-            <p>Datum zadnjeg pregleda: {selectedZivotinja.zadnjiPregled}</p>
-            <p>Napomena: {selectedZivotinja.napomena}</p>
-             <button onClick={() => udomiZivotinju(zivotinja.id)}>
+        </div>
+        <div className="kartice">
+          {filtriraneZivotinje.map((zivotinja) => (
+            <div
+              key={zivotinja.id}
+              className="kartica"
+              onClick={() => openModal(zivotinja)}
+            >
+              <img
+                src={zivotinja.slika}
+                alt={zivotinja.ime}
+                height={250}
+                width={320}
+              />
+            </div>
+          ))}
+        </div>
+        <Popup open={selectedZivotinja !== null} onClose={closeModal}>
+          {selectedZivotinja && (
+            <div className="image-container">
+              <img
+                src={selectedZivotinja.slika}
+                alt={selectedZivotinja.ime}
+                height={400}
+                width={500}
+              />
+              <h3>{selectedZivotinja.ime}</h3>
+              <p>Vrsta: {selectedZivotinja.vrsta}</p>
+              <p>Starost: {selectedZivotinja.starost}</p>
+              <p>Spol: {selectedZivotinja.spol}</p>
+              <p>Rasa: {selectedZivotinja.rasa}</p>
+              <p>
+                Status:{" "}
+                {selectedZivotinja.udomljen ? "Udomljena" : "Nije udomljena"}
+              </p>
+              <p>Čipiran: {selectedZivotinja.cip ? "Da" : "Ne"}</p>
+              <p>Datum zadnjeg pregleda: {selectedZivotinja.zadnjiPregled}</p>
+              <p>Napomena: {selectedZivotinja.napomena}</p>
+              <button onClick={() => udomiZivotinju(selectedZivotinja.id)}>
                 Udomi životinju
               </button>
-          </div>
-        )}
-      </Popup>
-    </>
-  );
-}
-
-export default PrikazZivotinja;
+            </div>
+          )}
+        </Popup>
+     </>
+  )
+          }
+          export default PrikazZivotinja;
+  

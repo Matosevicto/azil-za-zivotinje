@@ -1,13 +1,12 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import ONama from './components/ONama';
-import Popis from './components/Popis';
-import Donacije from './components/Donacije';
-import Obavjesti from './components/Obavjesti';
-import Unos from './components/Unos';
-import './App.css';
-import axios from 'axios';
-
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import ONama from "./components/ONama";
+import Popis from "./components/Popis";
+import Donacije from "./components/Donacije";
+import Obavjesti from "./components/Obavjesti";
+import Unos from "./components/Unos";
+import "./App.css";
+import axios from "axios";
 
 const UserRoleContext = createContext();
 
@@ -16,27 +15,33 @@ function UserRoleToggle() {
 
   return (
     <div>
-      <label className='userRoleToggle' htmlFor="userRoleToggle">Admin</label>
-      <input className='role'
+      <label className="userRoleToggle" htmlFor="userRoleToggle">
+        Admin
+      </label>
+      <input
+        className="role"
         type="checkbox"
         id="userRoleToggle"
-        checked={userRole === 'admin'}
-        onChange={() => setUserRole(userRole === 'korisnik' ? 'admin' : 'korisnik')}
+        checked={userRole === "admin"}
+        onChange={() =>
+          setUserRole(userRole === "korisnik" ? "admin" : "korisnik")
+        }
       />
     </div>
   );
 }
 
 function App() {
-  const [userRole, setUserRole] = useState('korisnik');
+  const [userRole, setUserRole] = useState("korisnik");
 
   const [zivotinje, postaviZivotinje] = useState([]);
- 
+
   useEffect(() => {
     axios
       .get("http://localhost:3001/zivotinje/")
-      .then(res => postaviZivotinje(res.data));
+      .then((res) => postaviZivotinje(res.data));
   }, []);
+
   const handleNovaŽivotinja = (novaDonacija) => {
     const newDonacija = {
       id: donacije.length + 1,
@@ -44,6 +49,8 @@ function App() {
       vrijednost: novaDonacija.vrijednost,
       opis: novaDonacija.opis,
     };
+  };
+
   return (
     <UserRoleContext.Provider value={{ userRole, setUserRole }}>
       <div>
@@ -81,9 +88,7 @@ function App() {
         </Router>
       </div>
     </UserRoleContext.Provider>
-    
   );
 }
 
 export default App;
-
