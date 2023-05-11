@@ -53,12 +53,14 @@ function Unos(props) {
     postaviPodatke({ ...formaPodaci, [name]: value });
   }
   
- 
 
   const handleSpolChange = (event) => {
     const spolValue = event.target.value;
     postaviPodatke({ ...formaPodaci, spol: spolValue }); // Update the "spol" value in the state
   };
+
+
+
   
   return (
     <>
