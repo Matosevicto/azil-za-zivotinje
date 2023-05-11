@@ -1,62 +1,68 @@
 import React, { useState } from "react";
 import "../Styles.css";
-import axios from 'axios';
+import axios from "axios";
 
 function Unos(props) {
-  const [podaci, postaviPodatke] = useState({
+  const [formaPodaci, postaviPodatke] = useState({
+    id:"",
     ime: "",
     vrsta: "",
     spol: "",
     starost: "",
     rasa: "",
-    udomljen: "",
+    udomljen: false,
     slika: "",
-    cip: "",
+    cip: false,
     zadnjiPregled: "",
     napomena: "",
   });
-  const [udomljen, postaviUdomljen] = useState(false);
-  const [cip, postaviCip] = useState(false);
-
-  function obradiPodatke(objekt){
-    return {
-      "zivotinja" : {
-        "ime" : objekt.ime,
-        "vrsta": objekt.vrsta,
-        "spol": objekt.spol,
-        "starost":Number(objekt.starost),
-        "rasa": objekt.rasa,
-        "udomljen":objekt.udomljen,
-        "slika":objekt.slika,
-        "cip":objekt.cip,
-        "zadnjiPregled":objekt.zadnjiPregled,
-        "napomena":objekt.napomena
-
-      }
-     
-    }
-  }
   const saljiPodatke = (event) => {
     event.preventDefault();
-    console.log(podaci);
-  
-    const zaSlanje = obradiPodatke(podaci);
-  
-    axios.post("http://localhost:3001/zivotinje", zaSlanje)
-      .then(ziv => {
-        axios.get("http://localhost:3001/zivotinje")
-          .then(ziv => props.dodaj(ziv.data));
+    console.log(formaPodaci);
+    const zaSlanje = obradiPodatke(formaPodaci);
+    
+
+    axios
+      .post("http://localhost:3001/zivotinje", zaSlanje)
+
+      .then((rez) => {
+        props.dodaj((stanje) => [...stanje, rez.data]);
       });
   };
-  function promjenaUlaza(event) {
-    const { name, value } = event.target;
-    postaviPodatke({ ...podaci, [name]: value });
-  }
-  
 
+  function obradiPodatke(objekt) {
+    return {
+      id: "",
+      ime: objekt.ime,
+      vrsta: objekt.vrsta,
+      spol: objekt.spol,
+      starost: Number(objekt.starost),
+      rasa: objekt.rasa,
+      udomljen: objekt.udomljen,
+      slika: objekt.slika,
+      cip: objekt.cip,
+      zadnjiPregled: objekt.zadnjiPregled,
+      napomena: objekt.napomena,
+    };
+  }
+
+  function promjenaUlaza(event) {
+    console.log(event.target);
+    const { name, value, type, checked } = event.target;
+    const newValue = type === "checkbox" ? checked : value;
+    postaviPodatke({ ...formaPodaci, [name]: value });
+  }
+  const [udomljen, postaviUdomljen]=useState(false);
+  const [cip, postaviCip]=useState(false);
+
+  const handleSpolChange = (event) => {
+    const spolValue = event.target.value;
+    postaviPodatke({ ...formaPodaci, spol: spolValue }); // Update the "spol" value in the state
+  };
+  
   return (
     <>
-    <h2>Unos životinje</h2>
+      <h2>Unos životinje</h2>
       <form onSubmit={saljiPodatke}>
         <label>
           Ime:
@@ -64,7 +70,7 @@ function Unos(props) {
             className="ime"
             type="text"
             name="ime"
-            value={podaci.ime}
+            value={formaPodaci.ime}
             onChange={promjenaUlaza}
             required
           />
@@ -75,7 +81,7 @@ function Unos(props) {
             className="vrsta"
             type="text"
             name="vrsta"
-            value={podaci.vrsta}
+            value={formaPodaci.vrsta}
             onChange={promjenaUlaza}
             required
           />
@@ -86,18 +92,29 @@ function Unos(props) {
             className="starost"
             type="number"
             name="starost"
-            value={podaci.starost}
+            value={formaPodaci.starost}
             onChange={promjenaUlaza}
             required
           />
-        </label>
+          </label>
+        <label htmlFor="genderSelect">Odaberi spol:</label>
+        <select
+          id="genderSelect"
+          value={formaPodaci.spol} // Bind the selected value to "formaPodaci.spol"
+          onChange={handleSpolChange}
+          required
+        >
+          <option value="">Odaberi</option>
+          <option value="muško">Muško</option>
+          <option value="žensko">Žensko</option>
+        </select>
         <label>
           Rasa:
           <input
             className="rasa"
             type="text"
             name="rasa"
-            value={podaci.rasa}
+            value={formaPodaci.rasa}
             onChange={promjenaUlaza}
             required
           />
@@ -107,8 +124,9 @@ function Unos(props) {
           <input
             className="udomljen"
             type="checkbox"
-            checked={udomljen}
-            onChange={(event) => postaviUdomljen(event.target.checked)}
+            name="udomljen"
+            checked={formaPodaci.udomljen}
+            onChange={promjenaUlaza}
           />
         </label>
         <label>
@@ -117,7 +135,7 @@ function Unos(props) {
             className="slika"
             type="url"
             name="slika"
-            value={podaci.slika}
+            value={formaPodaci.slika}
             onChange={promjenaUlaza}
             required
           />
@@ -127,8 +145,9 @@ function Unos(props) {
           <input
             className="cip"
             type="checkbox"
-            checked={cip}
-            onChange={(event) => postaviCip(event.target.checked)}
+            name="cip"
+            checked={formaPodaci.cip}
+            onChange={promjenaUlaza}
           />
         </label>
         <label>
@@ -137,7 +156,7 @@ function Unos(props) {
             className="zadnji-pregled"
             type="date"
             name="zadnjiPregled"
-            value={podaci.zadnjiPregled}
+            value={formaPodaci.zadnjiPregled}
             onChange={promjenaUlaza}
             required
           />
@@ -148,7 +167,7 @@ function Unos(props) {
             className="napomena"
             type="text"
             name="napomena"
-            value={podaci.napomena}
+            value={formaPodaci.napomena}
             onChange={promjenaUlaza}
             required
           />
