@@ -20,7 +20,7 @@
       "spol": "Ženski",
       "starost": "4",
       "rasa": "Sijamska mačka",
-      "udomljen": false,
+      "udomljen": true,
       "slika": "https://i.insider.com/5c0963a06dcee402370f3664?width=1000&format=jpeg&auto=webp",
       "zadnjiPregled": "2021-10-05",
       "napomena": "Potreban joj je poseban tretman."
@@ -42,7 +42,7 @@
       "vrsta": "Papiga",
       "spol": "Muški",
       "starost": "5",
-      "udomljen": false,
+      "udomljen": true,
       "slika": "https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcSTugKTmEPVY8XzNEn-TfOMtjJWldo9jrCkWmBytN_BH_shhll2hUw4GrFeAh40x9tz91gEoUSP40cm08w",
       "zadnjiPregled": "2023-04-22",
       "napomena": "Zna govoriti nekoliko riječi."
@@ -64,7 +64,7 @@
       "vrsta": "Štakor",
       "spol": "Ženski",
       "starost": "1.5",
-      "udomljen": false,
+      "udomljen": true,
       "slika": "https://cdn.pixabay.com/photo/2017/08/07/20/43/rat-2602017_960_720.jpg",
       "zadnjiPregled": "2022-12-10",
       "napomena": "Socijalna i igračkama zainteresirana."
@@ -130,17 +130,17 @@
     },
     {
       "id": 2,
-      "kategorija": "trazi",
+      "kategorija": "donirano",
       "tip": "Igračke",
       "vrijednost": 15,
       "opis": "Grebalica za mačke"
     },
     {
       "id": 3,
-      "kategorija": "donirano",
-      "tip": "Ostalo",
-      "vrijednost": 25,
-      "opis": "Kavez za srednje papige"
+      "kategorija": "nudi",
+      "tip": "fffff",
+      "vrijednost": "2",
+      "opis": "ffff"
     }
   ]
 }

@@ -52,8 +52,8 @@ function Unos(props) {
     const newValue = type === "checkbox" ? checked : value;
     postaviPodatke({ ...formaPodaci, [name]: value });
   }
-  const [udomljen, postaviUdomljen]=useState(false);
-  const [cip, postaviCip]=useState(false);
+  
+ 
 
   const handleSpolChange = (event) => {
     const spolValue = event.target.value;
@@ -100,7 +100,7 @@ function Unos(props) {
         <label htmlFor="genderSelect">Odaberi spol:</label>
         <select
           id="genderSelect"
-          value={formaPodaci.spol} // Bind the selected value to "formaPodaci.spol"
+          value={formaPodaci.spol} 
           onChange={handleSpolChange}
           required
         >
