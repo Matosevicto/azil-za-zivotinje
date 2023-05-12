@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../Styles.css";
+import "./Unos.css";
 import axios from "axios";
 
 function Unos(props) {
@@ -99,7 +99,7 @@ function Unos(props) {
             required
           />
           </label>
-        <label htmlFor="genderSelect">Odaberi spol:</label>
+        <label htmlFor="genderSelect" className="genderSelect">Spol:</label>
         <select
           id="genderSelect"
           value={formaPodaci.spol} 
@@ -121,7 +121,7 @@ function Unos(props) {
             required
           />
         </label>
-        <label>
+        <label id="udomljen">
           Udomljen:
           <input
             className="udomljen"
@@ -142,7 +142,7 @@ function Unos(props) {
             required
           />
         </label>
-        <label>
+        <label id="cip">
           Čip:
           <input
             className="cip"

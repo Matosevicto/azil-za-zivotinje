@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Modal from "react-modal";
 import UnosObavjesti from "./UnosObavjesti";
 import axios from "axios";
+import "./Obavijesti.css";
 
 function Obavjesti() {
   const [obavijesti, setObavijesti] = useState([]);

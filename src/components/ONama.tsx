@@ -5,6 +5,7 @@ import "../Styles.css";
 function ONama() {
   return (
     <div className="oNama">
+      <h2>O nama</h2>
       <p>
         Dobrodošli u naš Azil za životinje! Ovdje u našem azilu nastojimo pružiti
         sigurno i udobno utočište za životinje koje su izgubljene, napuštene,

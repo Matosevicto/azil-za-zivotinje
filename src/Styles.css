@@ -43,16 +43,16 @@ form {
     text-align: center;
     background-color:red;
   }  
-  .oNama {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    font-size: 1.1rem;
-    line-height: 1.5;
-  }
-  
  
-  
-  .image-container {
-    background-color: rgb(153, 153, 172);
-  }
+
+.oNama {
+  margin: 20px;
+  padding: 20px;
+  background-color: #e0f2e9;
+  color: #1b5e20;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+ 

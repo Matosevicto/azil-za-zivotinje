@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Popup from "reactjs-popup";
-import "../Styles.css";
+
 import UrediZivotinju from "./UrediZivotinju";
 
 function PrikazZivotinja(props) {

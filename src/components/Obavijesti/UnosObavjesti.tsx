@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import "../Styles.css"
+
 
 function UnosObavjesti({ dodajObavjest }) {
   const [novaObavjest, setNovaObavjest] = useState({

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Modal from "react-modal";
 import NovaDonacijaa from "./NovaDonacijaa";
-import "../Styles.css";
+
 import axios from "axios";
 
 function Donacije() {
