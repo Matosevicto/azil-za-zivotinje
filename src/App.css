@@ -28,9 +28,9 @@ body,
   padding: 0;
   color: #1b5e20;
   position: absolute;
-  top: 0;
+  top: 26px;
   left: 0;
-  font-size: 1.2rem;
+  font-size: 2.5rem;
   font-family: "Ubuntu";
   line-height: 1.5;
   font-weight: 900;
@@ -46,7 +46,7 @@ body,
   padding: 10px;
   margin-top: 10px;
   font-family: "Montserrat-Light";
-  font-size: 1.2rem;
+  font-size: 1.8rem;
 }
 
 /* Navbar links */
@@ -60,13 +60,45 @@ body,
 .nav-btn:hover {
   color: #4caf50;
 }
-
-/* User role toggle */
-.userRoleToggle {
-  margin-right: 10px;
+.form-check-label {
+  margin-left: 10px;
+  
 }
 
-/* User role checkbox */
-.role {
-  vertical-align: middle;
+.form-check-input {
+  position: absolute;
+  left: -9999px;
+}
+
+.form-check-input + .form-check-label:before {
+  content: '';
+  display: inline-block;
+  width: 32px;
+  height: 16px;
+  background-color: #6c757d;
+  border-radius: 8px;
+  position: relative;
+  top: 2px;
+  transition: background-color 0.3s ease;
+  
+}
+
+.form-check-input:checked + .form-check-label:before {
+  background-color: #007bff;
+  
+}
+
+.form-check-input:focus + .form-check-label:before {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  outline: none;
+  border-color: #007bff;
+}
+
+.form-check-input:disabled + .form-check-label {
+  opacity: 0.65;
+}
+
+.form-check-input:disabled + .form-check-label:before {
+  background-color: #e9ecef;
+  cursor: not-allowed;
 }

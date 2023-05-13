@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import Modal from "react-modal";
 import NovaDonacijaa from "./NovaDonacijaa";
-
+import Card from 'react-bootstrap/Card';
+import "./Donacije.css";
 import axios from "axios";
 
 function Donacije() {
@@ -58,8 +59,8 @@ function Donacije() {
   }, []);
 
   return (
-    <>
-      <button onClick={() => setShowModal(true)}>Nova donacija</button>
+    <Card id="donacije-card">
+      <button id="novaDonacijaBtn"   onClick={() => setShowModal(true)}>Nova donacija</button>
       <Modal
         className="modal"
         isOpen={showModal}
@@ -114,7 +115,7 @@ function Donacije() {
           {donacije
             .filter((donacija) => donacija.kategorija === "nudi")
             .map((donacija) => (
-              <tr key={donacija.id}>
+              <tr id="podaci-donacija" key={donacija.id}>
                 <td>{donacija.tip}</td>
                 <td>{donacija.vrijednost}</td>
                 <td>{donacija.opis}</td>
@@ -164,7 +165,7 @@ function Donacije() {
         </tbody>
       </table>
       <hr />
-    </>
+    </Card>
   );
 }
 
