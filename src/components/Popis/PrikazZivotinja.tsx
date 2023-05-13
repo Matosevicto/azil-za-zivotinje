@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Popup from "reactjs-popup";
-
+import Card from 'react-bootstrap/Card';
+import "./PrikazZivotinja.css";
 import UrediZivotinju from "./UrediZivotinju";
 
 function PrikazZivotinja(props) {
@@ -102,7 +103,7 @@ function PrikazZivotinja(props) {
       <h2>Popis životinja u azilu</h2>
       <div className="filtar">
         <div>
-          <label>Filtriraj po vrsti:</label>
+          <label>Vrsta:</label>
           <div>
             <label>
               <input
@@ -134,7 +135,7 @@ function PrikazZivotinja(props) {
             </div>
           </div>
           <div>
-            <label>Filtriraj po statusu:</label>
+            <label>Status:</label>
             <div>
               <label>
                 <input

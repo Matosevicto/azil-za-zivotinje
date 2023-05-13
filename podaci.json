@@ -48,24 +48,26 @@
       "napomena": "Zna govoriti nekoliko riječi."
     },
     {
-      "id": "5",
-      "ime": "Mimi",
-      "vrsta": "Zlatna ribica",
-      "spol": "Ženski",
-      "starost": "2",
-      "udomljen": true,
-      "slika": "",
-      "zadnjiPregled": "2023-03-17",
-      "napomena": "Potrebno je često mijenjati vodu u akvariju."
+      "id": "ycomDmN",
+      "ime": "Aris",
+      "vrsta": "Pas",
+      "spol": "muško",
+      "starost": 3,
+      "rasa": "Border colie",
+      "udomljen": false,
+      "slika": "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcSicTvqw5dy2qxOAs-6Xh616uHmK8zx1oyFv7S4bjhyMaoBdySq1msHDaHvkAx756wKQi_I4quzToIbsYk",
+      "cip": false,
+      "zadnjiPregled": "2023-05-01",
+      "napomena": "Razigran"
     },
     {
       "id": "6",
       "ime": "Kiki",
-      "vrsta": "Štakor",
+      "vrsta": "Macka",
       "spol": "Ženski",
       "starost": "1.5",
       "udomljen": false,
-      "slika": "https://cdn.pixabay.com/photo/2017/08/07/20/43/rat-2602017_960_720.jpg",
+      "slika": "https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcQ5pAUkFjASncLgVEsqVbwyTj0LP1ObO85jakWZEibYYmjHzzQux9-C1zQ2DXiZnAldF_l5_EXyZXQqQf4",
       "zadnjiPregled": "2022-12-10",
       "napomena": "Socijalna i igračkama zainteresirana."
     },
@@ -79,51 +81,12 @@
       "slika": "https://cdn.pixabay.com/photo/2016/11/29/13/02/animal-1868911_960_720.jpg",
       "zadnjiPregled": "2023-01-01",
       "napomena": "Potrebno mu je sunce i mjesta za kretanje."
-    },
-    {
-      "id": "GtGEf0L",
-      "ime": "78578578",
-      "vrsta": "tghf",
-      "spol": "muško",
-      "starost": 2,
-      "rasa": "gfg",
-      "udomljen": "",
-      "slika": "http://localhost:5174/unos",
-      "cip": "",
-      "zadnjiPregled": "2023-05-16",
-      "napomena": "vghfg"
-    },
-    {
-      "id": "yaBy-TH",
-      "ime": "ff",
-      "vrsta": "tghf",
-      "spol": "muško",
-      "starost": 4,
-      "rasa": "gfg",
-      "udomljen": "on",
-      "slika": "http://localhost:5174/unos",
-      "cip": "on",
-      "zadnjiPregled": "2023-05-22",
-      "napomena": "hfdhdh"
-    },
-    {
-      "id": "wXfQAy1",
-      "ime": "ff",
-      "vrsta": "tghf",
-      "spol": "muško",
-      "starost": 3,
-      "rasa": "gfg",
-      "udomljen": "on",
-      "slika": "http://localhost:5174/unos",
-      "cip": "on",
-      "zadnjiPregled": "2023-05-30",
-      "napomena": "fhghgh"
     }
   ],
   "donacije": [
     {
       "id": 1,
-      "kategorija": "donirano",
+      "kategorija": "trazi",
       "tip": "Hrana",
       "vrijednost": 25,
       "opis": "Suha hrana za pse - 10kg"
@@ -142,7 +105,6 @@
       "vrijednost": "2",
       "opis": "ffff"
     }
- 
   ],
   "obavijesti": [
     {

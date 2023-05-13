@@ -1,76 +1,41 @@
-/* Unos component */
-html,
-body,
-#root {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
+#donacije-card {
+  padding: 20px;
 }
-h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    font-size: 1.2rem;
-  }
-  
-  label {
-    display: flex;
-    align-items: center;
-  }
-  
-  input[type="text"],
-  input[type="number"],
-  input[type="url"],
-  input[type="date"],
-  select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  input[type="checkbox"] {
-    margin-right: 5px;
-  }
-  
-  button[type="submit"] {
-    padding: 8px 16px;
-    background-color: #1b5e20;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #388e3c;
-  }
-  #genderSelect{
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    position: relative;
-    left: 250px;
-    bottom: 84px;
 
-  }
-  .genderSelect{
-    position: relative;
-    bottom: 20px;
-  }
-  #udomljen{
-    position: relative;
-    bottom: 40px;
-  }
-  #cip{
-    position: relative;
-    bottom: 24px;
-  }
+#novaDonacijaBtn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th,
+td {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.modal {
+  /* Add styles for the modal if needed */
+}

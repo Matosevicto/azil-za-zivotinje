@@ -5,6 +5,7 @@ import Popis from './components/Popis/Popis';
 import Donacije from './components/Donacije/Donacije';
 import Obavjesti from './components/Obavijesti/Obavjesti';
 import Unos from './components/Unos/Unos';
+import Toggle from 'react-bootstrap-toggle';
 import './App.css';
 import axios from 'axios';
 
@@ -14,15 +15,18 @@ function UserRoleToggle() {
   const { userRole, setUserRole } = useContext(UserRoleContext);
 
   return (
-    <div>
-      <label className='userRoleToggle' htmlFor="userRoleToggle">Admin</label>
+    <div className="form-check form-switch">
       <input
-        className='role'
+        className="form-check-input"
         type="checkbox"
         id="userRoleToggle"
         checked={userRole === 'admin'}
         onChange={() => setUserRole(userRole === 'korisnik' ? 'admin' : 'korisnik')}
+        
       />
+      <label className="form-check-label" htmlFor="userRoleToggle">
+        Admin
+      </label>
     </div>
   );
 }
@@ -45,8 +49,8 @@ function App() {
        
         <Router>
           <div className="navbar">
-            <div className='title'>
-          <h1 >Azil za životinje</h1>
+            <div >
+          <h1 className='title'>Azil za životinje</h1>
           </div>
             <Link to="/oNama" className="nav-btn">
               O nama
@@ -64,7 +68,7 @@ function App() {
               Unos
             </Link>
             <Link to="/" className="nav-btn">
-              Povratak na početnu stranicu
+             Početna
             </Link>
             <UserRoleToggle />
           </div>
