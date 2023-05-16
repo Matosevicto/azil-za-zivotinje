@@ -2,10 +2,10 @@ import { useState } from "react";
 import axios from "axios";
 
 
-function NovaDonacijaa({ dodajDonaciju }) {
+function NovaDonacijaAdmin({ dodajDonaciju }) {
   const [novaDonacija, setNovaDonacija] = useState({
     id:"",
-    kategorija:"nudi",
+    kategorija:"trazi",
     tip: "",
     vrijednost: "",
     opis: "",
@@ -16,7 +16,7 @@ function NovaDonacijaa({ dodajDonaciju }) {
     console.log(novaDonacija);
     const zaSlanje = obradiPodatke(novaDonacija);
 
-    axios.post("http://localhost:3001/obavijesti", zaSlanje)
+    axios.post("http://localhost:3001/donacije", zaSlanje)
     .then((rez) => {
       dodajDonaciju(stanje => [...stanje, rez.data])
     });
@@ -26,7 +26,7 @@ function NovaDonacijaa({ dodajDonaciju }) {
   function obradiPodatke(objekt) {
     return {
      id:"",
-     kategorija:"nudi",
+     kategorija:"trazi",
       tip: objekt.tip,
       vrijednost: objekt.vrijednost,
       opis: objekt.opis,
@@ -82,4 +82,4 @@ function NovaDonacijaa({ dodajDonaciju }) {
   );
 }
 
-export default NovaDonacijaa;
+export default NovaDonacijaAdmin;

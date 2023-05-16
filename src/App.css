@@ -28,9 +28,9 @@ body,
   padding: 0;
   color: #1b5e20;
   position: absolute;
-  top: 26px;
+  top: 10px;
   left: 0;
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   font-family: "Ubuntu";
   line-height: 1.5;
   font-weight: 900;
@@ -46,7 +46,7 @@ body,
   padding: 10px;
   margin-top: 10px;
   font-family: "Montserrat-Light";
-  font-size: 1.8rem;
+  font-size: 2.2rem;
 }
 
 /* Navbar links */

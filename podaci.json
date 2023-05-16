@@ -104,6 +104,27 @@
       "tip": "fffff",
       "vrijednost": "2",
       "opis": "ffff"
+    },
+    {
+      "id": 4,
+      "kategorija": "trazi",
+      "tip": "Hrana",
+      "vrijednost": "4",
+      "opis": "Hrana za macke 4 kg"
+    },
+    {
+      "id": 5,
+      "kategorija": "donirano",
+      "tip": "Hrana",
+      "vrijednost": "5",
+      "opis": "Hrana za macke 5 kg"
+    },
+    {
+      "id": 6,
+      "kategorija": "nudi",
+      "tip": "d",
+      "vrijednost": "2",
+      "opis": "eee"
     }
   ],
   "obavijesti": [

@@ -1,7 +1,13 @@
-import React, { useReducer, useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import "./PrikazZivotinja.css";
 
 function UrediZivotinju({ selectedZivotinja, onClose }) {
-  const [formaPodaci, setFormaPodaci] = useState(selectedZivotinja);
+  const [formaPodaci, setFormaPodaci] = useState({});
+
+  useEffect(() => {
+    setFormaPodaci(selectedZivotinja);
+  }, [selectedZivotinja]);
 
   const promjenaUlaza = (e) => {
     const { name, value, type, checked } = e.target;
@@ -13,30 +19,24 @@ function UrediZivotinju({ selectedZivotinja, onClose }) {
     e.preventDefault();
     const updatedData = formaPodaci;
 
-    // Make a PUT request to update the data on the server
     axios
-      .put(`api/animals/${selectedZivotinja.id}`, updatedData)
+      .put(`http://localhost:3001/zivotinje/${selectedZivotinja.id}`, updatedData)
       .then((response) => {
-        // Handle the response from the server
         if (response.status === 200) {
-          // Data successfully updated
-          // Close the editing mode by calling `onClose` function
           onClose();
         } else {
-          // Handle error case
-          // Display an error message or take appropriate action
+         
         }
       })
       .catch((error) => {
-        // Handle network or other errors
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   };
-   
-  
 
   return (
+    
     <>
+    <div className="uredivanje-zivotinje">
       <h2>Uređivanje životinje</h2>
       <form onSubmit={spremiPromjene}>
         <label>
@@ -130,6 +130,7 @@ function UrediZivotinju({ selectedZivotinja, onClose }) {
         </label>
         <button type="submit">Spremi promjene</button>
       </form>
+      </div>
     </>
   );
 }

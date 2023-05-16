@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import Modal from "react-modal";
-import NovaDonacijaa from "./NovaDonacijaa";
-import Card from 'react-bootstrap/Card';
+import NovaDonacijaKorisnik from "./NovaDonacijaKorisnik";
+import NovaDonacijaAdmin from "./NovaDonacijaAdmin";
+import Card from "react-bootstrap/Card";
 import "./Donacije.css";
 import axios from "axios";
 
-function Donacije() {
+function Donacije(props) {
   const [donacije, setDonacije] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
@@ -60,13 +61,24 @@ function Donacije() {
 
   return (
     <Card id="donacije-card">
-      <button id="novaDonacijaBtn"   onClick={() => setShowModal(true)}>Nova donacija</button>
+      <button id="novaDonacijaBtn" onClick={() => setShowModal(true)}>
+        Nova donacija
+      </button>
       <Modal
         className="modal"
         isOpen={showModal}
         onRequestClose={() => setShowModal(false)}
       >
-        <NovaDonacijaa dodajDonaciju={handleNovaDonacija} />
+        {props.userRole === "korisnik" && (
+          <>
+            <NovaDonacijaKorisnik dodajDonaciju={handleNovaDonacija} />
+          </>
+        )}
+        {props.userRole === "admin" && (
+          <>
+            <NovaDonacijaAdmin dodajDonaciju={handleNovaDonacija} />
+          </>
+        )}
       </Modal>
 
       <h2>Tražimo:</h2>
@@ -87,13 +99,24 @@ function Donacije() {
                 <td>{donacija.vrijednost}</td>
                 <td>{donacija.opis}</td>
                 <td>
-                  <button onClick={() => handleAcceptDonacija(donacija.id)}>
-                    Donirano
-                  </button>
+                  {props.userRole === "admin" && (
+                    <>
+                      <button onClick={() => handleAcceptDonacija(donacija.id)}>
+                        Donirano
+                      </button>
 
-                  <button onClick={() => handleObrisiDonaciju(donacija.id)}>
-                    Izbriši
-                  </button>
+                      <button onClick={() => handleObrisiDonaciju(donacija.id)}>
+                        Izbriši
+                      </button>
+                    </>
+                  )}
+                  {props.userRole === "korisnik" && (
+                    <>
+                      <button onClick={() => handleAcceptDonacija(donacija.id)}>
+                        Doniraj
+                      </button>
+                    </>
+                  )}
                 </td>
               </tr>
             ))}
@@ -120,13 +143,17 @@ function Donacije() {
                 <td>{donacija.vrijednost}</td>
                 <td>{donacija.opis}</td>
                 <td>
-                  <button onClick={() => handleAcceptDonacija(donacija.id)}>
-                    Prihvati
-                  </button>
+                  {props.userRole === "admin" && (
+                    <>
+                      <button onClick={() => handleAcceptDonacija(donacija.id)}>
+                        Prihvati
+                      </button>
 
-                  <button onClick={() => handleObrisiDonaciju(donacija.id)}>
-                    Izbriši
-                  </button>
+                      <button onClick={() => handleObrisiDonaciju(donacija.id)}>
+                        Izbriši
+                      </button>
+                    </>
+                  )}
                 </td>
               </tr>
             ))}
@@ -152,13 +179,15 @@ function Donacije() {
                 <td>{donacija.vrijednost}</td>
                 <td>{donacija.opis}</td>
                 <td>
-                  <button onClick={() => (donacija.id)}>
-                    Ponovi
-                  </button>
+                  {props.userRole === "admin" && (
+                    <>
+                      <button onClick={() => donacija.id}>Ponovi</button>
 
-                  <button onClick={() => handleObrisiDonaciju(donacija.id)}>
-                    Izbriši
-                  </button>
+                      <button onClick={() => handleObrisiDonaciju(donacija.id)}>
+                        Izbriši
+                      </button>
+                    </>
+                  )}
                 </td>
               </tr>
             ))}

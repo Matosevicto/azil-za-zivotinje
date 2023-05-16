@@ -1,0 +1,12 @@
+.oNama {
+    margin: 20px;
+    padding: 20px;
+    background-color: #e0f2e9;
+    color: #1b5e20;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 1.9rem;
+  }
+  .onama-title{
+    font-size: 2rem;
+  }

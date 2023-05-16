@@ -1,4 +1,4 @@
-import "../Styles.css";
+import "./ONama.css";
 
 
 

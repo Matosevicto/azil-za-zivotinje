@@ -1,13 +1,14 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import ONama from './components/ONama';
-import Popis from './components/Popis/Popis';
+import ONama from './components/ONama/ONama';
+import Prikaz from './components/Popis/PrikazZivotinja';
 import Donacije from './components/Donacije/Donacije';
 import Obavjesti from './components/Obavijesti/Obavjesti';
 import Unos from './components/Unos/Unos';
 import './App.css';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
+import PrikazZivotinja from './components/Popis/PrikazZivotinja';
 
 const UserRoleContext = createContext();
 
@@ -52,7 +53,8 @@ function App() {
             <div >
           <h1 className='title'>Azil za životinje</h1>
           </div>
-            <Link to="/oNama" className="nav-btn">
+          
+            <Link to="/" className="nav-btn">
               O nama
             </Link>
             <Link to="/popis" className="nav-btn">
@@ -67,17 +69,18 @@ function App() {
             <Link to="/unos" className="nav-btn">
               Unos
             </Link>
-            <Link to="/" className="nav-btn">
-             Početna
-            </Link>
+           
             <UserRoleToggle />
           </div>
           
           <Routes>
-            <Route path="/oNama" element={<ONama />} />
-            <Route path="/popis" element={<Popis />} />
-            <Route path="/donacije" element={<Donacije />} />
-            <Route path="/obavjesti" element={<Obavjesti />} />
+            <Route path="/" element={<ONama />} />
+            <Route path="/popis" element={<PrikazZivotinja userRole={userRole} />} />
+            <Route
+             path="/donacije"
+             element={<Donacije userRole={userRole} />}
+             />
+            <Route path="/obavjesti" element={<Obavjesti userRole={userRole} />} />
             <Route
   path="/unos"
   element={
