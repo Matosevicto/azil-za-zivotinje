@@ -5,9 +5,9 @@ import Popis from './components/Popis/Popis';
 import Donacije from './components/Donacije/Donacije';
 import Obavjesti from './components/Obavijesti/Obavjesti';
 import Unos from './components/Unos/Unos';
-import Toggle from 'react-bootstrap-toggle';
 import './App.css';
 import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 
 const UserRoleContext = createContext();
 
@@ -78,7 +78,16 @@ function App() {
             <Route path="/popis" element={<Popis />} />
             <Route path="/donacije" element={<Donacije />} />
             <Route path="/obavjesti" element={<Obavjesti />} />
-            <Route path="/unos" element={<Unos dodaj={postaviZivotinje} />} />
+            <Route
+  path="/unos"
+  element={
+    userRole === 'admin' ? (
+      <Unos dodaj={postaviZivotinje} />
+    ) : (
+      <Navigate to="/" replace />
+    )
+  }
+/>
           </Routes>
         </Router>
       </div>

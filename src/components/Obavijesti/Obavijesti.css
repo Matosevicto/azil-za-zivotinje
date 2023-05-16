@@ -1,4 +1,8 @@
 /* Obavjesti component */
+
+#obavijesti{
+margin: 30px;
+}
 h1 {
     font-size: 24px;
     margin-bottom: 20px;

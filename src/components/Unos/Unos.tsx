@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Card from 'react-bootstrap/Card';
 import "./Unos.css";
 import axios from "axios";
 
@@ -63,8 +64,8 @@ function Unos(props) {
 
   
   return (
-    <>
-      <h2>Unos životinje</h2>
+    <Card className="unos-card">
+      <h2 className="unos-title">Unos životinje</h2>
       <form onSubmit={saljiPodatke}>
         <label>
           Ime:
@@ -99,7 +100,7 @@ function Unos(props) {
             required
           />
           </label>
-        <label htmlFor="genderSelect" className="genderSelect">Spol:</label>
+        <label htmlFor="genderSelect" className="genderSelect-title">Spol:</label>
         <select
           id="genderSelect"
           value={formaPodaci.spol} 
@@ -121,7 +122,8 @@ function Unos(props) {
             required
           />
         </label>
-        <label id="udomljen">
+        <div id="udomljen">
+        <label >
           Udomljen:
           <input
             className="udomljen"
@@ -131,6 +133,7 @@ function Unos(props) {
             onChange={promjenaUlaza}
           />
         </label>
+        </div>
         <label>
           Slika:
           <input
@@ -142,7 +145,8 @@ function Unos(props) {
             required
           />
         </label>
-        <label id="cip">
+        <div id="cip">
+        <label >
           Čip:
           <input
             className="cip"
@@ -152,6 +156,7 @@ function Unos(props) {
             onChange={promjenaUlaza}
           />
         </label>
+        </div>
         <label>
           Datum zadnjeg pregleda:
           <input
@@ -163,6 +168,7 @@ function Unos(props) {
             required
           />
         </label>
+        <div id="napomena">
         <label>
           Napomena:
           <input
@@ -174,10 +180,11 @@ function Unos(props) {
             required
           />
         </label>
+        </div>
 
-        <button type="submit">Dodaj životinju</button>
+        <button id="dodaj-zivotinju" type="submit">Dodaj životinju</button>
       </form>
-    </>
+    </Card>
   );
 }
 export default Unos;

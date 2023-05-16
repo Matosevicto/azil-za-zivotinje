@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import UnosObavjesti from "./UnosObavjesti";
 import axios from "axios";
 import "./Obavijesti.css";
+import Card from 'react-bootstrap/Card';
 
 function Obavjesti() {
   const [obavijesti, setObavijesti] = useState([]);
@@ -35,8 +36,8 @@ function Obavjesti() {
   };
 
   return (
-    <div>
-      <h1>Obavijesti o azilu</h1>
+    <Card id="obavjesti" >
+      
       <div>
       <button onClick={() => setShowModal(true)}>Nova obavjest</button>
       <Modal
@@ -63,7 +64,7 @@ function Obavjesti() {
             ))}
           </ul>
         )}
-      </div>
+      </Card>
    
   );
 }
