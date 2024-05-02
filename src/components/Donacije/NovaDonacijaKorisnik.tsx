@@ -11,27 +11,27 @@ function NovaDonacijaKorisnik({ dodajDonaciju }) {
     opis: "",
   });
 
-  const saljiPodatke = (event) => {
+  const saljiPodatke = async (event) => {
     event.preventDefault();
-    console.log(novaDonacija);
-    const zaSlanje = obradiPodatke(novaDonacija);
+    if (!novaDonacija.tip || !novaDonacija.vrijednost || !novaDonacija.opis) {
+      alert("Molim ispuniti sva polja.");
+      return;
+    }
 
-    axios.post("http://localhost:3001/donacije", zaSlanje)
-    .then((rez) => {
-      dodajDonaciju(stanje => [...stanje, rez.data])
-    });
+    try {
+      await axios.post('http://localhost:3001/donacije', {
+        id: "",
+        kategorija: "nudi",
+        tip: novaDonacija.tip,
+        vrijednost: novaDonacija.vrijednost,
+        opis: novaDonacija.opis
+      });
+      alert('Donacija sigurno spremljena');
+    } catch (error) {
+      console.error('Problem u spremanju donacije:', error);
+      alert('Problem u spremanju donacije');
+    }
   };
-  
-
-  function obradiPodatke(objekt) {
-    return {
-     id:"",
-     kategorija:"nudi",
-      tip: objekt.tip,
-      vrijednost: objekt.vrijednost,
-      opis: objekt.opis,
-    };
-  }
 
   function promjenaUlaza(event) {
     console.log(event.target);

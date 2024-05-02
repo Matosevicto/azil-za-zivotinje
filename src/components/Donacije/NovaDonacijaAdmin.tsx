@@ -1,42 +1,41 @@
 import { useState } from "react";
 import axios from "axios";
 
-
 function NovaDonacijaAdmin({ dodajDonaciju }) {
   const [novaDonacija, setNovaDonacija] = useState({
-    id:"",
-    kategorija:"trazi",
+    id: "",
+    kategorija: "trazi",
     tip: "",
     vrijednost: "",
     opis: "",
   });
 
-  const saljiPodatke = (event) => {
+  const saljiPodatke = async (event) => {
     event.preventDefault();
-    console.log(novaDonacija);
-    const zaSlanje = obradiPodatke(novaDonacija);
+    if (!novaDonacija.tip || !novaDonacija.vrijednost || !novaDonacija.opis) {
+      alert("Molim ispuniti sva polja.");
+      return;
+    }
 
-    axios.post("http://localhost:3001/donacije", zaSlanje)
-    .then((rez) => {
-      dodajDonaciju(stanje => [...stanje, rez.data])
-    });
+    try {
+      await axios.post('http://localhost:3001/donacije', {
+        id: "",
+        kategorija: "traži",
+        tip: novaDonacija.tip,
+        vrijednost: novaDonacija.vrijednost,
+        opis: novaDonacija.opis
+      });
+      alert('Donacija sigurno spremljena');
+    } catch (error) {
+      console.error('Problem u spremanju donacije:', error);
+      alert('Problem u spremanju donacije');
+    }
   };
-  
-
-  function obradiPodatke(objekt) {
-    return {
-     id:"",
-     kategorija:"trazi",
-      tip: objekt.tip,
-      vrijednost: objekt.vrijednost,
-      opis: objekt.opis,
-    };
-  }
 
   function promjenaUlaza(event) {
-    console.log(event.target);
-    const { name, value } = event.target;
-    setNovaDonacija({ ...novaDonacija, [name]: value });
+    const { name, value, type } = event.target;
+    const newValue = type === "checkbox" ? event.target.checked : value;
+    setNovaDonacija(prevState => ({ ...prevState, [name]: newValue }));
   }
 
   return (

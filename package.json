@@ -10,9 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "axios": "^1.4.0",
-    "bootstrap": "^5.2.3",
+    "axios": "^1.6.8",
+    "bootstrap": "^5.3.3",
     "jwt-decode": "^3.1.2",
+    "modal": "^1.2.0",
     "navigate": "^0.3.6",
     "popup": "^0.0.3",
     "react": "^18.2.0",
@@ -33,7 +34,7 @@
     "eslint": "^8.38.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
-    "typescript": "^5.0.2",
-    "vite": "^4.3.2"
+    "typescript": "^5.4.5",
+    "vite": "^4.5.3"
   }
 }

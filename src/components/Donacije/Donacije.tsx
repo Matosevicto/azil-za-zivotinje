@@ -13,6 +13,7 @@ function Donacije(props) {
   const handleNovaDonacija = (novaDonacija) => {
     const newDonacija = {
       id: donacije.length + 1,
+      kategorija:novaDonacija.kategorija,
       tip: novaDonacija.tip,
       vrijednost: novaDonacija.vrijednost,
       opis: novaDonacija.opis,
@@ -56,7 +57,7 @@ function Donacije(props) {
     axios
       .get("http://localhost:3001/donacije")
       .then((response) => setDonacije(response.data))
-      .catch((error) => console.log(error));
+      .catch((error) => console.error("Error fetching donations:", error));
   }, []);
 
   return (
@@ -88,6 +89,7 @@ function Donacije(props) {
             <th>Tip</th>
             <th>Vrijednost</th>
             <th>Opis</th>
+            <th>Akcija</th>
           </tr>
         </thead>
         <tbody>
@@ -95,9 +97,9 @@ function Donacije(props) {
             .filter((donacija) => donacija.kategorija === "trazi")
             .map((donacija) => (
               <tr key={donacija.id}>
-                <td>{donacija.tip}</td>
-                <td>{donacija.vrijednost}</td>
-                <td>{donacija.opis}</td>
+                <td className="centriranje">{donacija.tip}</td>
+                <td className="centriranje">{donacija.vrijednost}</td>
+                <td className="centriranje">{donacija.opis}</td>
                 <td>
                   {props.userRole === "admin" && (
                     <>
@@ -132,6 +134,7 @@ function Donacije(props) {
             <th>Tip</th>
             <th>Vrijednost</th>
             <th>Opis</th>
+            <th>Akcija</th>
           </tr>
         </thead>
         <tbody>
@@ -139,10 +142,10 @@ function Donacije(props) {
             .filter((donacija) => donacija.kategorija === "nudi")
             .map((donacija) => (
               <tr id="podaci-donacija" key={donacija.id}>
-                <td>{donacija.tip}</td>
-                <td>{donacija.vrijednost}</td>
-                <td>{donacija.opis}</td>
-                <td>
+                <td className="centriranje">{donacija.tip}</td>
+                <td className="centriranje">{donacija.vrijednost}</td>
+                <td className="centriranje">{donacija.opis}</td>
+                <td className="centriranje">
                   {props.userRole === "admin" && (
                     <>
                       <button onClick={() => handleAcceptDonacija(donacija.id)}>
@@ -168,6 +171,7 @@ function Donacije(props) {
             <th>Tip</th>
             <th>Vrijednost</th>
             <th>Opis</th>
+            <th>Akcija</th>
           </tr>
         </thead>
         <tbody>
@@ -175,10 +179,10 @@ function Donacije(props) {
             .filter((donacija) => donacija.kategorija === "donirano")
             .map((donacija) => (
               <tr key={donacija.id}>
-                <td>{donacija.tip}</td>
-                <td>{donacija.vrijednost}</td>
-                <td>{donacija.opis}</td>
-                <td>
+                <td className="centriranje">{donacija.tip}</td>
+                <td className="centriranje">{donacija.vrijednost}</td>
+                <td className="centriranje">{donacija.opis}</td>
+                <td className="centriranje">
                   {props.userRole === "admin" && (
                     <>
                       <button onClick={() => donacija.id}>Ponovi</button>

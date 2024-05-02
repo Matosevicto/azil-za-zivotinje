@@ -17,48 +17,47 @@ function Unos(props) {
     zadnjiPregled: "",
     napomena: "",
   });
-  const saljiPodatke = (event) => {
+  const saljiPodatke = async (event) => {
     event.preventDefault();
-    console.log(formaPodaci);
-    const zaSlanje = obradiPodatke(formaPodaci);
+    if (!formaPodaci.ime || !formaPodaci.vrsta || !formaPodaci.starost || !formaPodaci.spol || !formaPodaci.rasa  || !formaPodaci.slika || !formaPodaci.zadnjiPregled|| !formaPodaci.napomena) {
+      alert('Molim ispuniti sva polja');
+      return;
+    }
     
-
-    axios
-      .post("http://localhost:3001/zivotinje", zaSlanje)
-
-      .then((rez) => {
-        props.dodaj((stanje) => [...stanje, rez.data]);
-      });
-  };
-
-  function obradiPodatke(objekt) {
-    return {
+    
+    try {
+      await axios.post('http://localhost:3001/zivotinje', {
       id: "",
-      ime: objekt.ime,
-      vrsta: objekt.vrsta,
-      spol: objekt.spol,
-      starost: Number(objekt.starost),
-      rasa: objekt.rasa,
-      udomljen: objekt.udomljen,
-      slika: objekt.slika,
-      cip: objekt.cip,
-      zadnjiPregled: objekt.zadnjiPregled,
-      napomena: objekt.napomena,
-    };
-  }
+      ime: formaPodaci.ime,
+      vrsta: formaPodaci.vrsta,
+      spol: formaPodaci.spol,
+      starost: Number(formaPodaci.starost),
+      rasa: formaPodaci.rasa,
+      udomljen: formaPodaci.udomljen,
+      slika: formaPodaci.slika,
+      cip: formaPodaci.cip,
+      zadnjiPregled: formaPodaci.zadnjiPregled,
+      napomena: formaPodaci.napomena,
+    });
+  alert('Životinja sigurno spremljena');
+} catch (error) {
+  console.error('Problem u spremanju životinje:', error);
+  alert('Problem u spremanju životinje');
+}
+};
 
-  function promjenaUlaza(event) {
-    console.log(event.target);
-    const { name, value, type, checked } = event.target;
-    const newValue = type === "checkbox" ? checked : value;
-    postaviPodatke({ ...formaPodaci, [name]: value });
-  }
-  
+function promjenaUlaza(event) {
+  const { name, value, type, checked } = event.target;
+  const newValue = type === "checkbox" ? checked : value;
+  postaviPodatke({ ...formaPodaci, [name]: newValue });
+}
 
-  const handleSpolChange = (event) => {
-    const spolValue = event.target.value;
-    postaviPodatke({ ...formaPodaci, spol: spolValue }); // Update the "spol" value in the state
-  };
+
+const handleSpolChange = (event) => {
+  const spolValue = event.target.value;
+  postaviPodatke({ ...formaPodaci, spol: spolValue });
+};
+
 
 
 

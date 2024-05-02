@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import ONama from './components/ONama/ONama';
-import Prikaz from './components/Popis/PrikazZivotinja';
 import Donacije from './components/Donacije/Donacije';
 import Obavjesti from './components/Obavijesti/Obavjesti';
 import Unos from './components/Unos/Unos';

@@ -2,8 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 
 
-function UnosObavjesti({ dodajObavjest }) {
-  const [novaObavjest, setNovaObavjest] = useState({
+function UnosObavijesti({ dodajObavjest }) {
+  const [novaObavijest, setNovaObavijest] = useState({
     id:"",
     naslov:"",
     datum: "",
@@ -11,32 +11,32 @@ function UnosObavjesti({ dodajObavjest }) {
     vazno: false
   });
 
-  const saljiPodatke = (event) => {
+  const saljiPodatke = async (event) => {
     event.preventDefault();
-    console.log(novaObavjest);
-    const zaSlanje = obradiPodatke(novaObavjest);
+    if (!novaObavijest.naslov || !novaObavijest.datum || !novaObavijest.tekst) {
+      alert("Molim ispuniti sva polja.");
+      return;
+    }
 
-    axios.post("http://localhost:3001/obavijesti", zaSlanje)
-    .then((rez) => {
-        dodajObavjest(stanje => [...stanje, rez.data])
-    });
+    try {
+      await axios.post('http://localhost:3001/obavijesti', {
+        id: "",
+        naslov: novaObavijest.naslov,
+        datum: novaObavijest.datum,
+        tekst: novaObavijest.tekst,
+        vazno: novaObavijest.vazno
+      });
+      alert('Obavijest sigurno spremljena');
+    } catch (error) {
+      console.error('Problem u spremanju obavijesti:', error);
+      alert('Problem u spremanju obavijesti');
+    }
   };
-  
-
-  function obradiPodatke(objekt) {
-    return {
-     id:"",
-     naslov: objekt.naslov,
-      datum: objekt.datum,
-      tekst: objekt.tekst,
-      vazno: objekt.vazno,
-    };
-  }
   function promjenaUlaza(event) {
     console.log(event.target);
     const { name, value, type, checked } = event.target;
     const newValue = type === "checkbox" ? checked : value;
-    setNovaObavjest({ ...novaObavjest, [name]: value });
+    setNovaObavijest({ ...novaObavijest, [name]: value });
   }
 
   
@@ -48,7 +48,7 @@ function UnosObavjesti({ dodajObavjest }) {
           <input
             type="text"
             name="naslov"
-            value={novaObavjest.naslov}
+            value={novaObavijest.naslov}
             onChange={promjenaUlaza}
             required
           />
@@ -61,7 +61,7 @@ function UnosObavjesti({ dodajObavjest }) {
             className="datum"
             type="date"
             name="datum"
-            value={novaObavjest.datum}
+            value={novaObavijest.datum}
             onChange={promjenaUlaza}
             required
           />
@@ -73,7 +73,7 @@ function UnosObavjesti({ dodajObavjest }) {
           <input
             type="text"
             name="tekst"
-            value={novaObavjest.tekst}
+            value={novaObavijest.tekst}
             onChange={promjenaUlaza}
             required
           />
@@ -86,7 +86,7 @@ function UnosObavjesti({ dodajObavjest }) {
             className="vazno"
             type="checkbox"
             name="vazno"
-            checked={novaObavjest.vazno}
+            checked={novaObavijest.vazno}
             onChange={promjenaUlaza}
           />
         </label>
@@ -95,4 +95,4 @@ function UnosObavjesti({ dodajObavjest }) {
     </form>
   );
 }
-export default UnosObavjesti;
+export default UnosObavijesti;

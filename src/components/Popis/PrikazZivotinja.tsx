@@ -14,7 +14,7 @@ function PrikazZivotinja(props) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000")
+      .get("http://localhost:3001/zivotinje")
       .then((response) => postaviZivotinje(response.data))
       .catch((error) => console.log(error));
   }, []);
