@@ -20,7 +20,7 @@ function NovaDonacijaAdmin({ dodajDonaciju }) {
     try {
       await axios.post('http://localhost:3001/donacije', {
         id: "",
-        kategorija: "traži",
+        kategorija: "trazi",
         tip: novaDonacija.tip,
         vrijednost: novaDonacija.vrijednost,
         opis: novaDonacija.opis

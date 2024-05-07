@@ -27,14 +27,10 @@ function Donacije(props) {
       ...donacije[donacijaIndex],
       kategorija: "donirano",
     };
-
+  
     axios
       .put(`http://localhost:3001/donacije/${id}`, {
-        id: "",
-        kategorija: updatedDonacija.kategorija,
-        tip: updatedDonacija.tip,
-        vrijednost: updatedDonacija.vrijednost,
-        opis: updatedDonacija.opis,
+        kategorija: "donirano",
       })
       .then(() => {
         const newDonacije = [...donacije];
@@ -100,14 +96,14 @@ function Donacije(props) {
                 <td className="centriranje">{donacija.tip}</td>
                 <td className="centriranje">{donacija.vrijednost}</td>
                 <td className="centriranje">{donacija.opis}</td>
-                <td>
+                <td className="centriranje">
                   {props.userRole === "admin" && (
                     <>
                       <button onClick={() => handleAcceptDonacija(donacija.id)}>
                         Donirano
                       </button>
 
-                      <button onClick={() => handleObrisiDonaciju(donacija.id)}>
+                      <button  onClick={() => handleObrisiDonaciju(donacija.id)}>
                         Izbriši
                       </button>
                     </>
