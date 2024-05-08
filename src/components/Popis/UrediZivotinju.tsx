@@ -33,6 +33,8 @@ function UrediZivotinju({ selectedZivotinja, onClose }) {
       });
   };
 
+  
+
   return (
     
     <>

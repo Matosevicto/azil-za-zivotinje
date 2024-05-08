@@ -23,16 +23,32 @@ function PrikazZivotinja(props) {
     axios
       .patch(`http://localhost:3001/zivotinje/${id}`, { udomljen: true })
       .then((response) => {
+    
         const updatedZivotinje = zivotinje.map((zivotinja) => {
           if (zivotinja.id === id) {
             return { ...zivotinja, udomljen: true };
           }
           return zivotinja;
         });
+  
+       
         postaviZivotinje(updatedZivotinje);
       })
+      .catch((error) => {
+        
+        console.error('Error updating zivotinja:', error);
+        
+      });
+  };
+  const handleObrisiZivotinju = (id) => {
+    axios
+      .delete(`http://localhost:3001/zivotinje/${id}`)
+      .then((response) =>
+        postaviZivotinje(zivotinje.filter((zivotinja) => zivotinja.id !== id))
+      )
       .catch((error) => console.log(error));
   };
+  
 
   const handleVrstaFilterChange = (value) => {
     if (vrstaFilter.includes(value)) {
@@ -217,6 +233,12 @@ function PrikazZivotinja(props) {
                   onClick={handleUrediClick}
                 >
                   Uredi
+                </button>
+                <button
+                  className="uredi-zivotinju_botun"
+                  onClick={() => handleObrisiZivotinju(selectedZivotinja.id)}
+                >
+                  Izbriši
                 </button>
               </>
               
